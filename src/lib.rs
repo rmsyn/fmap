@@ -2,6 +2,7 @@
 
 extern crate alloc;
 
+pub mod input_kv_pair;
 pub mod kv_list;
 pub mod valstr;
 
@@ -20,6 +21,7 @@ pub const FMAP_VER_MAJOR: u8 = 1;
 pub const FMAP_VER_MINOR: u8 = 1;
 pub const FMAP_STRLEN: usize = 32;
 pub const FMAP_AREA_LEN: usize = 42;
+pub const MAX_LEN: usize = 128;
 
 #[repr(C)]
 #[derive(PartialEq)]
@@ -39,7 +41,7 @@ pub const FLAG_LUT: [ValStr; 4] = [
 
 /// Mapping of volatile and static regions in firmware binary
 #[repr(C)]
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct FmapArea {
     /// Offset relative to base
     offset: u32,
